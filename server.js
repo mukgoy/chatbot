@@ -3,7 +3,6 @@ const fse = require('fs-extra')
 var express = require('express');
 var app = express();
 
-app.use(express.static('static'));
 app.use(express.static('dist'));
 
 app.get('/', function (req, res) {
@@ -40,6 +39,15 @@ var server = app.listen(80, function () {
    var port = server.address().port
 
    console.log("Example app listening at http://chatbot.com", host, port);
+
+   var dir = './dist/js';
+   if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir, { recursive: true });
+   }
+   dir = './dev/js';
+   if (!fs.existsSync(dir)){
+      fs.mkdirSync(dir, { recursive: true });
+   }
 
    loadMultipleJsFiles('js/embed.js',[
       'shared/usestrict.js',
