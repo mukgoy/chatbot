@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/botui/build/botui.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/botui/build/botui-theme-default.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue/2.0.5/vue.min.js"></script>
+    <script src="https://unpkg.com/botui/build/botui.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="css/chatbot.css">
+
+  </head>
+  <body>
+    <div class="container-fluid p-0" id="app">
+      <div class="card" v-show="isChatOpen">
+        <div class="card-header text-white" style="background-color: #0a5f54;">
+          <div class="d-flex flex-row">
+            <div class="">
+              <img :src="UIConfig.brandImg" class="rounded-circle" style="max-width: 50px;max-height: 50px;">
+            </div>
+            <div class="ml-2">
+              <div class="d-flex flex-column">
+                <div v-html="UIConfig.brandName"></div>
+                <div class="small" style="opacity: 0.8;">
+                  <span ng-bind="UIConfig.brandSubTitle"></span>
+                  <a v-if="whatsappLink" v-bind:href="whatsappLink" target="_blank">
+                    <img :src="image.whatsapp" class="rounded-circle w20h20">
+                  </a>
+                  <a v-if="UIConfig.instaLink" v-bind:href="UIConfig.instaLink" target="_blank">
+                    <img :src="image.instagram" class="rounded-circle w20h20">
+                  </a>
+                  <a v-if="UIConfig.twLink" v-bind:href="UIConfig.twLink" target="_blank">
+                    <img :src="image.twitter" class="rounded-circle w20h20">
+                  </a>
+                  <a v-if="UIConfig.fbLink" v-bind:href="UIConfig.fbLink" target="_blank">
+                    <img :src="image.facebook" class="rounded-circle w20h20">
+                  </a>
+                  <a v-if="UIConfig.supportNo" v-bind:href="'tel:' + UIConfig.supportNo" target="_blank">
+                    <img :src="image.phone" class="rounded-circle w20h20">
+                  </a>
+                  <a v-if="UIConfig.supportEmail" v-bind:href="'mailto:' +UIConfig.supportEmail" target="_blank">
+                    <img :src="image.email" class="rounded-circle w20h20">
+                  </a>
+                  <a v-if="UIConfig.youTube" v-bind:href="UIConfig.youTube" target="_blank">
+                    <img :src="image.youTube" class="rounded-circle w20h20">
+                  </a>
+                  <a v-if="UIConfig.messenger" v-bind:href="UIConfig.messenger" target="_blank">
+                    <img :src="image.messenger" class="rounded-circle w20h20">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="ml-auto">
+              <button type="button" class="close" v-on:click="toggleChatBox()" style="color: #FFF;">
+                <span>×</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body chat-body p-0" v-bind:class = "{'chat-body-bottom':!inputRequered}">
+          <div class="botui-app-container" id="stars-bot">
+            <bot-ui></bot-ui>
+          </div>
+        </div>
+        <div class="card-footer bgcolor-unset p-0" v-show="inputRequered">
+          <div class="input-group">
+            <textarea v-model="userMsg" v-on:keyup.enter="sendMsg()" class="form-control textarea-resize-none border-0 rounded-0 p-1" type="textarea" placeholder="Your Message Here" maxlength="6000" rows="2"></textarea>
+            <div class="input-group-append">
+              <button type="button" class="close m-2">
+                <i class="fa fa-paperclip" aria-hidden="true"></i>
+              </button>
+              <button type="button" class="close m-2" v-on:click="sendMsg()">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="chat-start" class="chat-start-container" v-show="!isChatOpen" v-on:click="toggleChatBox()"></div>
+    </div>
+    <script src="js/chatbot.js"></script>
+  </body>
+</html>
