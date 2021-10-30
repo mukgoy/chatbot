@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/botui/build/botui.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/botui/build/botui-theme-default.css" />
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
     <script src="https://cdn.jsdelivr.net/vue/2.0.5/vue.min.js"></script>
@@ -72,9 +73,11 @@
           <div class="input-group">
             <textarea v-model="userMsg" v-on:keyup.enter="sendMsg()" class="form-control textarea-resize-none border-0 rounded-0 p-1" type="textarea" placeholder="Your Message Here" maxlength="6000" rows="2"></textarea>
             <div class="input-group-append">
-              <button type="button" class="close m-2">
+              <button type="button" class="close m-2" onclick="{$('#file').trigger('click')}">
                 <i class="fa fa-paperclip" aria-hidden="true"></i>
               </button>
+              <input type="file" id="file" name="file" style="display: none" onchange="chatbotLive.httpPrepareUpload(this)">
+
               <button type="button" class="close m-2" v-on:click="sendMsg()">
                 <i class="fa fa-paper-plane" aria-hidden="true"></i>
               </button>

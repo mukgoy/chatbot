@@ -141,5 +141,5 @@ function ChatbotWelcome(){
 
 }
 
-var chatbotWelcome = new ChatbotWelcome();
-chatbotWelcome.init();
+// var chatbotWelcome = new ChatbotWelcome();
+// chatbotWelcome.init();

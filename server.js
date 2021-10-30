@@ -51,6 +51,7 @@ var server = app.listen(80, function () {
 
    loadMultipleJsFiles('js/embed.js',[
       'shared/usestrict.js',
+      'shared/config.js',
       'embed/config.js',
       'shared/util.js',
       'shared/postman.js',
@@ -63,6 +64,8 @@ var server = app.listen(80, function () {
    ]);
    loadMultipleJsFiles('js/chatbot.js',[
       'shared/usestrict.js',
+      'shared/config.js',
+      'shared/templates.js',
       'shared/util.js',
       'shared/postman.js',
       'shared/bubble-variables.js',

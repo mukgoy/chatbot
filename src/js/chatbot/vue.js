@@ -31,7 +31,15 @@ var vm = new Vue({
       });
     },
     sendMsg : function () {
-      let userMsg = this.userMsg;
+      let userMsg = this.userMsg.trim();
+
+      if(true){
+        console.log("test mode on");
+        chatbotLive.test(userMsg);
+        this.userMsg = "";
+        return;
+      }
+      
       botui.message.human({
         delay: delay,
         content: userMsg
@@ -40,6 +48,9 @@ var vm = new Vue({
         console.log("msg send success", userMsg);
       });
       this.userMsg = "";
+      
     },
  },
 });
+
+vm.toggleChatBox();
